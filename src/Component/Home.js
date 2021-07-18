@@ -1,15 +1,13 @@
-import React,{useState} from 'react'
+import React from 'react'
 import BlogList from './BlogList'
+import useFetch from '../Hooks/useFetch'
 const Home = () => {
-    const[blogs,setblogs]=useState([
-        {title:'안녕하세요! 민범기입니다!',body:'프론트 엔드 지망생 입니다.',author:'민범기',id:1},
-        {title:'안녕하세요! 민범기입니다!',body:'프론트 엔드 지망생 입니다.',author:'민범기',id:2},
-        {title:'안녕하세요! 민범기입니다!',body:'프론트 엔드 지망생 입니다.',author:'민범기',id:3},
-    ]);
-
+    const{data:blogs,isLoading,error}=useFetch(`http://localhost:3001/Blog`)
     return (
         <div className="home">
-            <BlogList blogs={blogs} title="Min Blog!!"></BlogList>
+            {error && <div>{error}</div>}
+            {isLoading && <div>Loading...</div>}
+            {blogs && <BlogList blogs={blogs} title="Min Blog!!"></BlogList>}
         </div>
     )
 }
