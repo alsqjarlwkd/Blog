@@ -5,10 +5,11 @@ const BlogCreate = () => {
     const[Body,setBody]=useState('');
     const[author,setauthor]=useState('')
     const[isLoading,setisLoading]=useState(false);
+    const Likes = 0;
     const History = useHistory();
     const handleSubmit=(e)=>{
         e.preventDefault()
-        const blog = {title,Body,author};
+        const blog = {title,Body,author,Likes};
         fetch('http://localhost:3001/Blog',{
             method:"POST",
             headers:{"Content-Type":"application/json"},
