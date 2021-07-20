@@ -6,16 +6,16 @@ const FixContent = () => {
     const[Body,setBody]=useState("");
     const[author,setauthor]=useState(""); 
     const History = useHistory();
-
+    const Likes = 0;
     const handleSubmit=(e)=>{
         e.preventDefault()
-        const blog = {title,Body,author}; // input에 e.target.value 값을 blog 객체에 저장
+        const blog = {title,Body,author,Likes}; // input에 e.target.value 값을 blog 객체에 저장
         fetch('http://localhost:3001/Blog/'+id,{
             method:"PUT",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(blog)
         }).then(()=>{
-            alert("Are you Really Fix this Blog?")
+            alert("Are you sure you want to edit your blog? Likes disappear when editing a blog")
             History.push("/")
         })
     }
