@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const BlogList = (props) => {
     const{blogs,title}=props;
-    console.log(blogs)
     return (
         <div className="blog-list">
              <h2>{title}</h2>
@@ -14,6 +13,7 @@ const BlogList = (props) => {
                     <Link to={`/blogs/${data.id}`}>
                     <h2>{data.title}</h2>
                     <p>Written byt {data.author}</p>
+                    <p>Likes:{data.Likes}</p>
                     </Link>
                     </div>
                     )
