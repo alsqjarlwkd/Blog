@@ -24,7 +24,8 @@ const BlogDetails = () => {
                 "Body": blogs.Body,
                 "author": blogs.author,
                 "Likes": blogs.Likes+1,
-                "id": blogs.id
+                "id": blogs.id,
+                "comment":blogs.comment
             })
         }).then(()=>{
             alert("are you really Like this blog?")
@@ -46,6 +47,37 @@ const BlogDetails = () => {
                     <Link to={`/FixContent/`+id}><button style={{marginLeft:"50px"}}>Fix Content</button></Link>
                 </article>
             )}
+            <section className="CommentSection">
+                <h1 style={{marginTop:"50px"}}>Comment</h1>
+                <Link to={'/CommentCreate/' + id}><button>Add Comment</button></Link>
+                {blogs &&  blogs.comment.map((comment,index)=>{
+                    return(
+                        <div key={index} style={{border:"thick double #f1356d",padding:"1rem"}} className={`CommentDiv${index}`}>
+                        <div>{comment}</div>
+                        <button onClick={()=>{
+                            const CommentData=blogs.comment
+                            CommentData.splice(index,1);
+                            fetch('http://localhost:3001/Blog/'+ blogs.id,{
+                            method:"PUT",
+                                headers:{"Content-Type":"application/json"},
+                                body:JSON.stringify({
+                                    "title": blogs.title,
+                                    "Body": blogs.Body,
+                                    "author": blogs.author,
+                                    "Likes": blogs.Likes,
+                                    "id": blogs.id,
+                                    "comment":CommentData
+                                })
+                            }).then(()=>{
+                                alert("are you really Delete this comment?")
+                                History.push(`/blogs/` + blogs.id)
+                            })
+                        }}>댓글 삭제</button>
+                        <Link to={`/FixComment/`+id}><button>댓글 수정</button></Link>
+                        </div>
+                    )
+                })}
+            </section>
         </div>
     )
 }
