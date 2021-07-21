@@ -5,7 +5,9 @@ import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 import BlogCreate from './Component/BlogCreate';
 import BlogDetails from './Component/BlogDetails';
 import FixContent  from './Component/FixContent';
+import CommentCreate from './Component/CommentCreate';
 import NotFound from './Component/NotFound';
+import FixComment from './Component/FixComment';
 function App() {
   return (
     <Router>
@@ -24,6 +26,12 @@ function App() {
           </Route>
           <Route path="/FixContent/:id">
             <FixContent></FixContent>
+          </Route>
+          <Route path="/CommentCreate/:id">
+            <CommentCreate></CommentCreate>
+          </Route>
+          <Route path="/FixComment/:id">
+            <FixComment></FixComment>
           </Route>
           <Route path="*">
             <NotFound></NotFound>
