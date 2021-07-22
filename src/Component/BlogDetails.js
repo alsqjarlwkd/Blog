@@ -73,7 +73,7 @@ const BlogDetails = () => {
                                 History.push(`/blogs/` + blogs.id)
                             })
                         }}>댓글 삭제</button>
-                        <Link to={`/FixComment/`+id}><button>댓글 수정</button></Link>
+                        <Link to={'/FixComment/'+id+'/'+index}><button>댓글 수정</button></Link>
                         </div>
                     )
                 })}
