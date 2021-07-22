@@ -5,10 +5,12 @@ import useFetch from '../Hooks/useFetch';
 const FixComment = () => {
     const History = useHistory();
     const[comment,setComment]=useState('');
-    const {id}=useParams();
+    const {id,index}=useParams();
     const {data:blogs,isLoading,error}=useFetch('http://localhost:3001/Blog/'+id)
-    console.log(blogs);
-    const FixComment=()=>{
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+        const CommentData=blogs.comment;
+        CommentData.splice(index,1,comment);
         fetch('http://localhost:3001/Blog/'+ blogs.id,{
             method:"PUT",
             headers:{"Content-Type":"application/json"},
@@ -18,17 +20,17 @@ const FixComment = () => {
                 "author": blogs.author,
                 "Likes": blogs.Likes,
                 "id": blogs.id,
-                "comment":[comment]
+                "comment":CommentData
             })
         })
-            History.push(`/blogs/${blogs.id}`)
             alert("Are You Sure Fix this Comment?")
+            History.push(`/blogs/${blogs.id}`)
     }
     return (
         <div className="create">
         {isLoading && <div>Loading...</div>}
         {error && <div>{error}</div>}
-        {blogs&&<form>
+        {blogs&&<form onSubmit={handleSubmit}>
             <h1>Fix Comment</h1>
                 <label>Comment:</label>
                 <textarea 
@@ -36,7 +38,7 @@ const FixComment = () => {
                 value={comment}
                 onChange={(e)=>setComment(e.target.value)}>
                 </textarea>
-                <button onClick={FixComment}>Fix Comment</button>
+                <button>Fix Comment</button>
             </form>}
         </div>
     )
