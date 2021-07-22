@@ -72,8 +72,8 @@ const BlogDetails = () => {
                                 alert("are you really Delete this comment?")
                                 History.push(`/blogs/` + blogs.id)
                             })
-                        }}>댓글 삭제</button>
-                        <Link to={'/FixComment/'+id+'/'+index}><button>댓글 수정</button></Link>
+                        }}>Delete</button>
+                        <Link to={'/FixComment/'+id+'/'+index}><button>Fix Comment</button></Link>
                         </div>
                     )
                 })}
