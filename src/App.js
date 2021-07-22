@@ -30,7 +30,7 @@ function App() {
           <Route path="/CommentCreate/:id">
             <CommentCreate></CommentCreate>
           </Route>
-          <Route path="/FixComment/:id">
+          <Route path="/FixComment/:id/:index">
             <FixComment></FixComment>
           </Route>
           <Route path="*">
