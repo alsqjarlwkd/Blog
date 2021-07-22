@@ -47,7 +47,7 @@ const FixContent = () => {
             value={author}
             >
             </input>
-            <button>FIx Blog</button>
+            <button>Fix Blog</button>
         </form>
     </div>
     )
