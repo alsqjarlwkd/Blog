@@ -26,4 +26,4 @@
 
 4.댓글 기능 추가
 
-![코멘트](https://user-images.githubusercontent.com/58499038/126637074-f2313232-2627-49db-be5e-ac2b38648e1b.png)
+![코멘트](https://user-images.githubusercontent.com/58499038/126637719-8f20b8a6-be87-4fd0-84d3-de6caf5a6636.png)
