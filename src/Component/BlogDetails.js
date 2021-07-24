@@ -48,8 +48,8 @@ const BlogDetails = () => {
                 </article>
             )}
             <section className="CommentSection">
-                <h1 style={{marginTop:"50px"}}>Comment</h1>
-                <Link to={'/CommentCreate/' + id}><button>Add Comment</button></Link>
+                {blogs && <h1 style={{marginTop:"50px"}}>Comment</h1>}
+                {blogs && <Link to={'/CommentCreate/' + id}><button>Add Comment</button></Link>}
                 {blogs &&  blogs.comment.map((comment,index)=>{
                     return(
                         <div key={index} style={{border:"thick double #f1356d",padding:"1rem"}} className={`CommentDiv${index}`}>
