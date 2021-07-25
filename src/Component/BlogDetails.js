@@ -7,28 +7,31 @@ const BlogDetails = () => {
     const {id}=useParams();
     const {data:blogs,isLoading,error}=useFetch('http://localhost:3001/Blog/'+id)
     const History = useHistory();
-    const handleClick=()=>{
+    const DeleteBlog=()=>{
+        alert("Are you really Delete this Blog?")
         fetch('http://localhost:3001/Blog/'+ blogs.id,{
             method:"DELETE"
         }).then(()=>{
-            alert("Are you really Delete this Blog?")
             History.push("/")
         })
     }
     const ClickLikes=()=>{
+        let ClickLike={
+            "title": blogs.title,
+            "Body": blogs.Body,
+            "author": blogs.author,
+            "Likes": blogs.Likes+1,
+            "id": blogs.id,
+            "comment":blogs.comment
+        }
+
+        alert("are you really Like this blog?")
         fetch('http://localhost:3001/Blog/'+ blogs.id,{
             method:"PUT",
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({
-                "title": blogs.title,
-                "Body": blogs.Body,
-                "author": blogs.author,
-                "Likes": blogs.Likes+1,
-                "id": blogs.id,
-                "comment":blogs.comment
-            })
-        }).then(()=>{
-            alert("are you really Like this blog?")
+            body:JSON.stringify(ClickLike)
+        }).then((res)=>res.json())
+        .then(()=>{
             History.push("/")
         })
     }
@@ -43,33 +46,34 @@ const BlogDetails = () => {
                     <p>Written by {blogs.author}</p>
                     <button style={{marginTop:"50px"}} onClick={ClickLikes}>Likes:{blogs.Likes}</button>
                     <div style={{border:"thick double #f1356d",padding:"3rem"}}>{blogs.Body}</div>
-                    <button onClick={handleClick}>Delete</button>
+                    <button onClick={DeleteBlog}>Delete</button>
                     <Link to={`/FixContent/`+id}><button style={{marginLeft:"50px"}}>Fix Content</button></Link>
                 </article>
             )}
-            <section className="CommentSection">
-                {blogs && <h1 style={{marginTop:"50px"}}>Comment</h1>}
-                {blogs && <Link to={'/CommentCreate/' + id}><button>Add Comment</button></Link>}
-                {blogs &&  blogs.comment.map((comment,index)=>{
+            {blogs && <section className="CommentSection">
+                <h1 style={{marginTop:"50px"}}>Comment</h1>
+                <Link to={'/CommentCreate/' + id}><button>Add Comment</button></Link>
+                {blogs.comment.map((comment,index)=>{
                     return(
                         <div key={index} style={{border:"thick double #f1356d",padding:"1rem"}} className={`CommentDiv${index}`}>
                         <div>{comment}</div>
                         <button onClick={()=>{
                             const CommentData=blogs.comment
                             CommentData.splice(index,1);
+                            let DeleteComment={
+                                "title": blogs.title,
+                                "Body": blogs.Body,
+                                "author": blogs.author,
+                                "Likes": blogs.Likes,
+                                "id": blogs.id,
+                                "comment":CommentData
+                            }
+                            alert("are you really Delete this comment?")
                             fetch('http://localhost:3001/Blog/'+ blogs.id,{
                             method:"PUT",
                                 headers:{"Content-Type":"application/json"},
-                                body:JSON.stringify({
-                                    "title": blogs.title,
-                                    "Body": blogs.Body,
-                                    "author": blogs.author,
-                                    "Likes": blogs.Likes,
-                                    "id": blogs.id,
-                                    "comment":CommentData
-                                })
+                                body:JSON.stringify(DeleteComment)
                             }).then(()=>{
-                                alert("are you really Delete this comment?")
                                 History.push(`/blogs/` + blogs.id)
                             })
                         }}>Delete</button>
@@ -77,7 +81,7 @@ const BlogDetails = () => {
                         </div>
                     )
                 })}
-            </section>
+            </section>}
         </div>
     )
 }

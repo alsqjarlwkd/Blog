@@ -8,21 +8,27 @@ const CommentCreate = () => {
     const {data:blogs,isLoading,error}=useFetch('http://localhost:3001/Blog/'+id)
     const AddComment=()=>{
         const CommentData=blogs.comment
-              CommentData.push(Comment)
-        fetch('http://localhost:3001/Blog/'+ blogs.id,{
-            method:"PUT",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({
+            CommentData.push(Comment)
+            let CommentAdd={
                 "title": blogs.title,
                 "Body": blogs.Body,
                 "author": blogs.author,
                 "Likes": blogs.Likes,
                 "id": blogs.id,
                 "comment":CommentData
-            })
+            }
+        alert("Are You Sure add this Comment?")
+        fetch('http://localhost:3001/Blog/'+ blogs.id,{
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(CommentAdd)
         })
-            History.push(`/blogs/${blogs.id}`)
-            alert("Are You Sure add this Comment?")
+        .then((res)=>{
+            return res.json()
+        })
+        .then(()=>{
+            History.push(`/blogs/`+ id)
+        })
     }
     return (
         <div className="create">

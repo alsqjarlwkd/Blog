@@ -10,13 +10,15 @@ const FixContent = () => {
     const comment = [];
     const handleSubmit=(e)=>{
         e.preventDefault()
+        alert("Are you sure you want to edit your blog? Likes,comment disappear when editing a blog")
         const blog = {title,Body,author,Likes,comment}; // input에 e.target.value 값을 blog 객체에 저장
         fetch('http://localhost:3001/Blog/'+id,{
             method:"PUT",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(blog)
-        }).then(()=>{
-            alert("Are you sure you want to edit your blog? Likes,comment disappear when editing a blog")
+        })
+        .then(res=>res.json())
+        .then(()=>{
             History.push("/")
         })
     }

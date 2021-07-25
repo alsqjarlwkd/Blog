@@ -4,21 +4,19 @@ const BlogCreate = () => {
     const[title,setTitle]=useState('');
     const[Body,setBody]=useState('');
     const[author,setauthor]=useState('')
-    const[isLoading,setisLoading]=useState(false);
     const Likes = 0;
     const comment = [];
     const History = useHistory();
     const handleSubmit=(e)=>{
         e.preventDefault()
         const blog = {title,Body,author,Likes,comment};
+        alert("Are you Really add this Blog?")
         fetch('http://localhost:3001/Blog',{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(blog)
         }).then(()=>{
-            setisLoading(false);
             History.push("/")
-            alert("Are you Really add this Blog?")
         })
     }
     return (
@@ -44,8 +42,7 @@ const BlogCreate = () => {
                 value={author}
                 onChange={(e)=>setauthor(e.target.value)}>
                 </input>
-                {!isLoading && <button>Add Blog</button>}
-                {isLoading && <button disabled>Adding blog...</button>}
+                <button>Add Blog</button>
             </form>
         </div>
     )

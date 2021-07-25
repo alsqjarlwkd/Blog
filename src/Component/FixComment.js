@@ -11,20 +11,23 @@ const FixComment = () => {
         e.preventDefault()
         const CommentData=blogs.comment;
         CommentData.splice(index,1,comment);
+        let CommnetFix={
+            "title": blogs.title,
+            "Body": blogs.Body,
+            "author": blogs.author,
+            "Likes": blogs.Likes,
+            "id": blogs.id,
+            "comment":CommentData
+        }
+        alert("Are You Sure Fix this Comment?")
         fetch('http://localhost:3001/Blog/'+ blogs.id,{
             method:"PUT",
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({
-                "title": blogs.title,
-                "Body": blogs.Body,
-                "author": blogs.author,
-                "Likes": blogs.Likes,
-                "id": blogs.id,
-                "comment":CommentData
-            })
+            body:JSON.stringify(CommnetFix)
+        }).then(res=>res.json())
+        .then(()=>{
+            History.push(`/blogs/`+id)
         })
-            alert("Are You Sure Fix this Comment?")
-            History.push(`/blogs/${blogs.id}`)
     }
     return (
         <div className="create">
