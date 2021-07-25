@@ -15,27 +15,13 @@ function App() {
       <Navbar></Navbar>
       <div className="content">
         <Switch>
-        <Route exact path="/">
-            <Home></Home>
-          </Route>
-          <Route path="/create">
-            <BlogCreate></BlogCreate>
-          </Route>
-          <Route path="/blogs/:id">
-            <BlogDetails></BlogDetails>
-          </Route>
-          <Route path="/FixContent/:id">
-            <FixContent></FixContent>
-          </Route>
-          <Route path="/CommentCreate/:id">
-            <CommentCreate></CommentCreate>
-          </Route>
-          <Route path="/FixComment/:id/:index">
-            <FixComment></FixComment>
-          </Route>
-          <Route path="*">
-            <NotFound></NotFound>
-          </Route>
+        <Route exact path="/" component={Home}></Route>
+          <Route path="/create" component={BlogCreate}></Route>
+          <Route path="/blogs/:id" component={BlogDetails}></Route>
+          <Route path="/FixContent/:id" component={FixContent}></Route>
+          <Route path="/CommentCreate/:id" component={CommentCreate}></Route>
+          <Route path="/FixComment/:id/:index" component={FixComment}></Route>
+          <Route path="*" component={NotFound}></Route>
         </Switch>
       </div>
     </div>
